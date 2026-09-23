@@ -5,7 +5,8 @@ import p3 from './assets/p3.png'
 import p4 from './assets/p4.png'
 import bundle from './assets/bundle.png'
 import Brush from './assets/Brush.png'
-
+import bloom from './assets/bloom.png'
+import Hero from './assets/Hero.png'
  function App () {
     return (
         <>
@@ -36,13 +37,46 @@ import Brush from './assets/Brush.png'
     </div>
   </div>
 </nav>
-<img
-  src={image}
+{/* <img
+  src={bloom}
   class="img-fluid d-block"
   alt="Baby Bloom product collection"
   style={{ width: '100%', height: '75vh', objectFit: 'cover', objectPosition: 'center' }}
-></img>
+></img> */}
 
+<div className="mx-3 my-4">
+  <div id="carouselExampleIndicators" className="carousel slide">
+
+    <div className="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div className="carousel-inner">
+      <div className="carousel-item active">
+        <img src= {bloom} className="d-block w-100" alt="..." />
+      </div>
+
+      <div className="carousel-item">
+        <img src={Hero} className="d-block w-100" alt="..." />
+      </div>
+
+      
+    </div>
+
+    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Previous</span>
+    </button>
+
+    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</div>
   <div className="container my-5">
   <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
 
@@ -189,6 +223,85 @@ import Brush from './assets/Brush.png'
 
   </div>
 </div>
+
+
+<footer className="bg-light text-white mt-5">
+  <div className="container py-5">
+    <div className="row">
+
+      {/* Brand */}
+      <div className="col-lg-4 col-md-6 mb-4">
+        <h4 className="text-primary">Baby Bloom</h4>
+        <p className="text-secondary">
+          Gentle care for your little ones. Discover products
+          made for happy, healthy beginnings.
+        </p>
+      </div>
+
+      {/* Quick Links */}
+      <div className="text-primary col-lg-2 col-md-6 mb-4">
+        <h5>Quick Links</h5>
+
+        <ul className="list-unstyled">
+          <li className="mb-2">
+            <a href="#" className="text-dark text-decoration-none">
+              Home
+            </a>
+          </li>
+
+          <li className="mb-2">
+            <a href="#" className="text-dark text-decoration-none">
+              Products
+            </a>
+          </li>
+
+          <li className="mb-2">
+            <a href="#" className="text-dark text-decoration-none">
+              Baby Tips
+            </a>
+          </li>
+
+          <li>
+            <a href="#" className="text-dark text-decoration-none">
+              About Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Customer Care */}
+      <div className="text-primary col-lg-3 col-md-6 mb-4">
+        <h5>Customer Care</h5>
+
+        <ul className="list-unstyled text-dark">
+          <li className="mb-2">Contact Us</li>
+          <li className="mb-2">Shipping & Delivery</li>
+          <li className="mb-2">Returns & Exchanges</li>
+          <li>FAQs</li>
+        </ul>
+      </div>
+
+      {/* Contact */}
+      <div className=" text-primary col-lg-3 col-md-6 mb-4">
+        <h5>Get in Touch</h5>
+
+        <p className="mb-2 text-dark">Email: hello@babybloom.com</p>
+        
+
+      </div>
+
+    </div>
+
+    <hr className="border-secondary" />
+
+    <div className="text-center">
+      <p className="mb-0 text-secondary">
+        © 2026 Baby Bloom. All rights reserved.
+      </p>
+    </div>
+
+  </div>
+</footer>
         </>
     );
  }
