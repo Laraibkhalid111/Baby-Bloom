@@ -7,6 +7,8 @@ import bundle from './assets/bundle.png'
 import Brush from './assets/Brush.png'
 import bloom from './assets/bloom.png'
 import Hero from './assets/Hero.png'
+
+
  function App () {
     return (
         <>
@@ -36,13 +38,9 @@ import Hero from './assets/Hero.png'
       </span>
     </div>
   </div>
+  
 </nav>
-{/* <img
-  src={bloom}
-  class="img-fluid d-block"
-  alt="Baby Bloom product collection"
-  style={{ width: '100%', height: '75vh', objectFit: 'cover', objectPosition: 'center' }}
-></img> */}
+
 
 <div className="mx-3 my-4">
   <div id="carouselExampleIndicators" className="carousel slide">
@@ -62,7 +60,7 @@ import Hero from './assets/Hero.png'
         <img src={Hero} className="d-block w-100" alt="..." />
       </div>
 
-      
+      <div className="carousel-item"></div>
     </div>
 
     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
