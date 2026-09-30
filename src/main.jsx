@@ -14,6 +14,10 @@ import EditProduct from './EditProduct.jsx'
 import ManageOrder from './ManageOrder.jsx'
 import DeliveryAssignment from './DeliveryAssignment.jsx'
 import DeliveryStatus from './DeliveryStatus.jsx'
+import DeliveryInformation from './DeliveryInformation.jsx'
+import Contact from './Contact.jsx'
+
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -28,5 +32,7 @@ createRoot(document.getElementById('root')).render(
     {/* <ManageOrder /> */}
     {/* <DeliveryAssignment /> */}
     {/* <DeliveryStatus /> */}
+    {/* <DeliveryInformation /> */}
+    <Contact />
   </StrictMode>,
 )
