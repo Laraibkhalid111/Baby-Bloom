@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom'
+import Navbar from './Navbar.jsx'
+
 function Signup() {
 	return (
-		<div className="container py-5">
+		<>
+			<Navbar />
+			<div className="container py-5">
 			<div className="row justify-content-center">
 				<div className="col-12 col-sm-10 col-md-8 col-lg-6">
 					<div className="card border-0 shadow-sm">
@@ -105,16 +110,17 @@ function Signup() {
 
 								<p className="text-center text-muted small mt-4 mb-0">
 									Already have an account?{' '}
-									<a href="#login" className="text-decoration-none">
+									<Link to="#login" className="text-decoration-none">
 										Login
-									</a>
+									</Link>
 								</p>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
+		</>
 	)
 }
 

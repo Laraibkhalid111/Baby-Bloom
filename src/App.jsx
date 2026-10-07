@@ -6,74 +6,18 @@ import p4 from './assets/p4.png'
 import bundle from './assets/bundle.png'
 import Brush from './assets/Brush.png'
 import bloom from './assets/bloom.png'
-import Hero from './assets/Hero.png'
+import { Link } from 'react-router-dom'
+import Navbar from './Navbar.jsx'
 
 
  function App () {
     return (
         <>
-        <nav class ="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand text-primary" href="#" >Baby Bloom</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Baby Tips</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About us</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button class="btn btn-primary me-md-2" type="button"> WHERE TO BUY </button>
-  
-</div>
-      </span>
-    </div>
-  </div>
-  
-</nav>
+        <Navbar />
 
 
 <div className="mx-3 my-4">
-  <div id="carouselExampleIndicators" className="carousel slide">
-
-    <div className="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <div className="carousel-inner">
-      <div className="carousel-item active">
-        <img src= {bloom} className="d-block w-100" alt="..." />
-      </div>
-
-      <div className="carousel-item">
-        <img src={Hero} className="d-block w-100" alt="..." />
-      </div>
-
-      <div className="carousel-item"></div>
-    </div>
-
-    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Previous</span>
-    </button>
-
-    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Next</span>
-    </button>
-
-  </div>
+  <img src={bloom} className="d-block w-100" alt="Baby Bloom hero" />
 </div>
   <div className="container my-5">
   <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
@@ -242,27 +186,27 @@ import Hero from './assets/Hero.png'
 
         <ul className="list-unstyled">
           <li className="mb-2">
-            <a href="#" className="text-dark text-decoration-none">
+            <Link to="#" className="text-dark text-decoration-none">
               Home
-            </a>
+            </Link>
           </li>
 
           <li className="mb-2">
-            <a href="#" className="text-dark text-decoration-none">
+            <Link to="#" className="text-dark text-decoration-none">
               Products
-            </a>
+            </Link>
           </li>
 
           <li className="mb-2">
-            <a href="#" className="text-dark text-decoration-none">
+            <Link to="#" className="text-dark text-decoration-none">
               Baby Tips
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="#" className="text-dark text-decoration-none">
+            <Link to="#" className="text-dark text-decoration-none">
               About Us
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

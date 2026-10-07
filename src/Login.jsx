@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom'
+import Navbar from './Navbar.jsx'
+
 function Login() {
 	return (
-		<div className="container py-5">
+		<>
+			<Navbar />
+			<div className="container py-5">
 			<div className="row justify-content-center">
 				<div className="col-12 col-sm-10 col-md-7 col-lg-5">
 					<div className="card border-0 shadow-sm">
@@ -38,9 +43,9 @@ function Login() {
 								</div>
 
 								<div className="text-end mb-4">
-									<a href="#forgot-password" className="small text-decoration-none">
+									<Link to="#forgot-password" className="small text-decoration-none">
 										Forgot Password?
-									</a>
+									</Link>
 								</div>
 
 								<button type="submit" className="btn btn-primary w-100">
@@ -49,16 +54,17 @@ function Login() {
 
 								<p className="text-center text-muted small mt-4 mb-0">
 									Don&apos;t have an account?{' '}
-									<a href="#sign-up" className="text-decoration-none">
+									<Link to="#sign-up" className="text-decoration-none">
 										Sign up
-									</a>
+									</Link>
 								</p>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
+		</>
 	)
 }
 
