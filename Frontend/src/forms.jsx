@@ -1,7 +1,6 @@
 import Login from './Login.jsx'
 import Signup from './Signup.jsx'
 import Checkout from './checkout.jsx'
-import Profile from './Profile.jsx'
 import Review from './Review.jsx'
 import AddProduct from './AddProduct.jsx'
 import EditProduct from './EditProduct.jsx'
@@ -17,7 +16,6 @@ import Contact from './Contact.jsx'
   <Login/>
   <Signup/>
   <Checkout/>
-  <Profile/>
   <Review/>
   <AddProduct/>
   <EditProduct/>

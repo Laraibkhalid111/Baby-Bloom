@@ -1,4 +1,4 @@
-function EditProduct() {
+function AddProduct() {
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -6,27 +6,12 @@ function EditProduct() {
           <div className="card border-0 shadow-sm">
             <div className="card-body p-4 p-md-5">
               <h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
-              <p className="text-center text-muted mb-4">Edit a product in the catalogue</p>
+              <p className="text-center text-muted mb-4">Add a new product to the catalogue</p>
 
               <form>
                 <div className="row g-3">
                   <div className="col-12">
-                    <label htmlFor="product" className="form-label">
-                      Select product
-                    </label>
-                    <select id="product" name="product" className="form-select" defaultValue="" required>
-                      <option value="" disabled>
-                        Select a product to edit
-                      </option>
-                      <option value="baby-shampoo">Baby Shampoo</option>
-                      <option value="baby-lotion">Baby Lotion</option>
-                      <option value="baby-oil">Baby Oil</option>
-                      <option value="baby-powder">Baby Powder</option>
-                    </select>
-                  </div>
-
-                  <div className="col-12">
-                    <label htmlFor="productName" className="form-label">
+                    <label htmlFor="productName" className="form-label fw-bold">
                       Product name
                     </label>
                     <input
@@ -40,7 +25,7 @@ function EditProduct() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="category" className="form-label">
+                    <label htmlFor="category" className="form-label fw-bold">
                       Product category
                     </label>
                     <select id="category" name="category" className="form-select" defaultValue="" required>
@@ -55,7 +40,7 @@ function EditProduct() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="sizeWeight" className="form-label">
+                    <label htmlFor="sizeWeight" className="form-label fw-bold">
                       Product size / weight
                     </label>
                     <input
@@ -69,7 +54,7 @@ function EditProduct() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="description" className="form-label">
+                    <label htmlFor="description" className="form-label fw-bold">
                       Product description
                     </label>
                     <textarea
@@ -77,13 +62,13 @@ function EditProduct() {
                       name="description"
                       className="form-control"
                       rows="4"
-                      placeholder="Update the product description"
+                      placeholder="Describe the product"
                       required
                     ></textarea>
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="price" className="form-label">
+                    <label htmlFor="price" className="form-label fw-bold">
                       Price
                     </label>
                     <div className="input-group">
@@ -102,7 +87,7 @@ function EditProduct() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="stockQuantity" className="form-label">
+                    <label htmlFor="stockQuantity" className="form-label fw-bold">
                       Stock quantity
                     </label>
                     <input
@@ -118,7 +103,7 @@ function EditProduct() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="productImage" className="form-label">
+                    <label htmlFor="productImage" className="form-label fw-bold">
                       Product image
                     </label>
                     <input
@@ -127,13 +112,13 @@ function EditProduct() {
                       name="productImage"
                       className="form-control"
                       accept="image/*"
+                      required
                     />
-                    <div className="form-text">Choose a new image only if you want to replace the current one.</div>
                   </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100 mt-4">
-                  Update Product
+                  Add Product
                 </button>
               </form>
             </div>
@@ -144,4 +129,4 @@ function EditProduct() {
   )
 }
 
-export default EditProduct
+export default AddProduct

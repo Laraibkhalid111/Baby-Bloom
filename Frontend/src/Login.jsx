@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar.jsx'
+import { Navbar } from './App.jsx'
 
 function Login() {
 	return (
@@ -15,7 +15,7 @@ function Login() {
 
 							<form>
 								<div className="mb-3">
-									<label htmlFor="email" className="form-label">
+									<label htmlFor="email" className="form-label fw-bold">
 										Email address
 									</label>
 									<input
@@ -29,7 +29,7 @@ function Login() {
 								</div>
 
 								<div className="mb-3">
-									<label htmlFor="password" className="form-label">
+									<label htmlFor="password" className="form-label fw-bold">
 										Password
 									</label>
 									<input

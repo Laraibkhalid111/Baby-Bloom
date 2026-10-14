@@ -1,4 +1,4 @@
-function DeliveryAssignment() {
+function DeliveryStatus() {
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -6,12 +6,12 @@ function DeliveryAssignment() {
           <div className="card border-0 shadow-sm">
             <div className="card-body p-4 p-md-5">
               <h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
-              <p className="text-center text-muted mb-4">Assign an order for delivery</p>
+              <p className="text-center text-muted mb-4">Update delivery status</p>
 
               <form>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label htmlFor="orderId" className="form-label">
+                    <label htmlFor="orderId" className="form-label fw-bold">
                       Order ID
                     </label>
                     <input
@@ -25,7 +25,7 @@ function DeliveryAssignment() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="customerName" className="form-label">
+                    <label htmlFor="customerName" className="form-label fw-bold">
                       Customer name
                     </label>
                     <input
@@ -39,7 +39,7 @@ function DeliveryAssignment() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="customerPhone" className="form-label">
+                    <label htmlFor="customerPhone" className="form-label fw-bold">
                       Customer phone number
                     </label>
                     <input
@@ -53,22 +53,8 @@ function DeliveryAssignment() {
                     />
                   </div>
 
-                  <div className="col-md-6">
-                    <label htmlFor="city" className="form-label">
-                      City
-                    </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      className="form-control"
-                      placeholder="Enter the delivery city"
-                      required
-                    />
-                  </div>
-
                   <div className="col-12">
-                    <label htmlFor="deliveryAddress" className="form-label">
+                    <label htmlFor="deliveryAddress" className="form-label fw-bold">
                       Delivery address
                     </label>
                     <textarea
@@ -76,48 +62,71 @@ function DeliveryAssignment() {
                       name="deliveryAddress"
                       className="form-control"
                       rows="3"
-                      placeholder="Enter the complete delivery address"
+                      placeholder="Enter the delivery address"
                       autoComplete="street-address"
                       required
                     ></textarea>
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="deliveryPerson" className="form-label">
-                      Delivery person
+                    <label htmlFor="currentStatus" className="form-label fw-bold">
+                      Current delivery status
                     </label>
                     <select
-                      id="deliveryPerson"
-                      name="deliveryPerson"
+                      id="currentStatus"
+                      name="currentStatus"
                       className="form-select"
                       defaultValue=""
                       required
                     >
                       <option value="" disabled>
-                        Select a delivery person
+                        Select current status
                       </option>
-                      <option value="sarah-johnson">Sarah Johnson</option>
-                      <option value="michael-brown">Michael Brown</option>
-                      <option value="amina-wilson">Amina Wilson</option>
-                      <option value="david-lee">David Lee</option>
+                      <option value="assigned">Assigned</option>
+                      <option value="out-for-delivery">Out for Delivery</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="delivery-failed">Delivery Failed</option>
+                      <option value="cancelled">Cancelled</option>
                     </select>
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="expectedDeliveryDate" className="form-label">
-                      Expected delivery date
+                    <label htmlFor="newStatus" className="form-label fw-bold">
+                      New delivery status
+                    </label>
+                    <select
+                      id="newStatus"
+                      name="newStatus"
+                      className="form-select"
+                      defaultValue=""
+                      required
+                    >
+                      <option value="" disabled>
+                        Select new status
+                      </option>
+                      <option value="assigned">Assigned</option>
+                      <option value="out-for-delivery">Out for Delivery</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="delivery-failed">Delivery Failed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+
+                  <div className="col-md-6">
+                    <label htmlFor="deliveryDate" className="form-label fw-bold">
+                      Delivery date
                     </label>
                     <input
                       type="date"
-                      id="expectedDeliveryDate"
-                      name="expectedDeliveryDate"
+                      id="deliveryDate"
+                      name="deliveryDate"
                       className="form-control"
                       required
                     />
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="deliveryNotes" className="form-label">
+                    <label htmlFor="deliveryNotes" className="form-label fw-bold">
                       Delivery notes
                     </label>
                     <textarea
@@ -125,13 +134,13 @@ function DeliveryAssignment() {
                       name="deliveryNotes"
                       className="form-control"
                       rows="3"
-                      placeholder="Add any special delivery instructions"
+                      placeholder="Add notes about the delivery"
                     ></textarea>
                   </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100 mt-4">
-                  Assign Delivery
+                  Update Delivery Status
                 </button>
               </form>
             </div>
@@ -142,4 +151,4 @@ function DeliveryAssignment() {
   )
 }
 
-export default DeliveryAssignment
+export default DeliveryStatus

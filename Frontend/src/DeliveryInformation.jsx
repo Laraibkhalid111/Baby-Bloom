@@ -11,7 +11,7 @@ function DeliveryInformation() {
               <form>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label htmlFor="orderId" className="form-label">
+                    <label htmlFor="orderId" className="form-label fw-bold">
                       Order ID
                     </label>
                     <input
@@ -25,7 +25,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="customerName" className="form-label">
+                    <label htmlFor="customerName" className="form-label fw-bold">
                       Customer name
                     </label>
                     <input
@@ -39,7 +39,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="customerPhone" className="form-label">
+                    <label htmlFor="customerPhone" className="form-label fw-bold">
                       Customer phone number
                     </label>
                     <input
@@ -54,7 +54,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="city" className="form-label">
+                    <label htmlFor="city" className="form-label fw-bold">
                       City
                     </label>
                     <input
@@ -68,7 +68,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="deliveryAddress" className="form-label">
+                    <label htmlFor="deliveryAddress" className="form-label fw-bold">
                       Delivery address
                     </label>
                     <textarea
@@ -83,7 +83,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="postalCode" className="form-label">
+                    <label htmlFor="postalCode" className="form-label fw-bold">
                       Postal code
                     </label>
                     <input
@@ -98,7 +98,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="deliveryPerson" className="form-label">
+                    <label htmlFor="deliveryPerson" className="form-label fw-bold">
                       Delivery person
                     </label>
                     <select
@@ -119,7 +119,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="expectedDeliveryDate" className="form-label">
+                    <label htmlFor="expectedDeliveryDate" className="form-label fw-bold">
                       Expected delivery date
                     </label>
                     <input
@@ -132,7 +132,7 @@ function DeliveryInformation() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="deliveryInstructions" className="form-label">
+                    <label htmlFor="deliveryInstructions" className="form-label fw-bold">
                       Delivery instructions / notes
                     </label>
                     <textarea

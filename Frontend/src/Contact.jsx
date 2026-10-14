@@ -11,7 +11,7 @@ function Contact() {
               <form>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label htmlFor="fullName" className="form-label">
+                    <label htmlFor="fullName" className="form-label fw-bold">
                       Full name
                     </label>
                     <input
@@ -26,7 +26,7 @@ function Contact() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="email" className="form-label">
+                    <label htmlFor="email" className="form-label fw-bold">
                       Email address
                     </label>
                     <input
@@ -41,7 +41,7 @@ function Contact() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="phone" className="form-label">
+                    <label htmlFor="phone" className="form-label fw-bold">
                       Phone number
                     </label>
                     <input
@@ -56,7 +56,7 @@ function Contact() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="issueType" className="form-label">
+                    <label htmlFor="issueType" className="form-label fw-bold">
                       Issue type
                     </label>
                     <select
@@ -78,7 +78,7 @@ function Contact() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="subject" className="form-label">
+                    <label htmlFor="subject" className="form-label fw-bold">
                       Subject
                     </label>
                     <input
@@ -92,7 +92,7 @@ function Contact() {
                   </div>
 
                   <div className="col-12">
-                    <label htmlFor="message" className="form-label">
+                    <label htmlFor="message" className="form-label fw-bold">
                       Message
                     </label>
                     <textarea

@@ -10,7 +10,7 @@ function Review() {
 
               <form>
                 <div className="mb-3">
-                  <label htmlFor="productName" className="form-label">
+                  <label htmlFor="productName" className="form-label fw-bold">
                     Product name
                   </label>
                   <input
@@ -24,7 +24,7 @@ function Review() {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="customerName" className="form-label">
+                  <label htmlFor="customerName" className="form-label fw-bold">
                     Customer name
                   </label>
                   <input
@@ -39,7 +39,7 @@ function Review() {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="rating" className="form-label">
+                  <label htmlFor="rating" className="form-label fw-bold">
                     Rating
                   </label>
                   <select id="rating" name="rating" className="form-select" required defaultValue="">
@@ -55,7 +55,7 @@ function Review() {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="feedback" className="form-label">
+                  <label htmlFor="feedback" className="form-label fw-bold">
                     Review / feedback
                   </label>
                   <textarea

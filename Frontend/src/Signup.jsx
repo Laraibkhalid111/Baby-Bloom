@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar.jsx'
+import { Navbar } from './App.jsx'
 
 function Signup() {
 	return (
@@ -15,7 +15,7 @@ function Signup() {
 
 							<form>
 								<div className="mb-3">
-									<label htmlFor="fullName" className="form-label">
+									<label htmlFor="fullName" className="form-label fw-bold">
 										Full name
 									</label>
 									<input
@@ -30,7 +30,7 @@ function Signup() {
 								</div>
 
 								<div className="mb-3">
-									<label htmlFor="email" className="form-label">
+									<label htmlFor="email" className="form-label fw-bold">
 										Email address
 									</label>
 									<input
@@ -45,7 +45,7 @@ function Signup() {
 								</div>
 
 								<div className="mb-3">
-									<label htmlFor="phone" className="form-label">
+									<label htmlFor="phone" className="form-label fw-bold">
 										Phone number
 									</label>
 									<input
@@ -60,7 +60,7 @@ function Signup() {
 								</div>
 
 								<div className="mb-3">
-									<label htmlFor="password" className="form-label">
+									<label htmlFor="password" className="form-label fw-bold">
 										Password
 									</label>
 									<input
@@ -76,7 +76,7 @@ function Signup() {
 								</div>
 
 								<div className="mb-3">
-									<label htmlFor="confirmPassword" className="form-label">
+									<label htmlFor="confirmPassword" className="form-label fw-bold">
 										Confirm password
 									</label>
 									<input
@@ -99,7 +99,7 @@ function Signup() {
 										className="form-check-input"
 										required
 									/>
-									<label htmlFor="terms" className="form-check-label">
+									<label htmlFor="terms" className="form-check-label fw-bold">
 										I agree to the Terms &amp; Conditions
 									</label>
 								</div>

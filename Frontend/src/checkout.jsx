@@ -11,7 +11,7 @@ function Checkout() {
 							<form>
 								<div className="row g-3">
 									<div className="col-md-6">
-										<label htmlFor="fullName" className="form-label">
+										<label htmlFor="fullName" className="form-label fw-bold">
 											Full name
 										</label>
 										<input
@@ -26,7 +26,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="province" className="form-label">
+										<label htmlFor="province" className="form-label fw-bold">
 											Province
 										</label>
 										<input
@@ -41,7 +41,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="email" className="form-label">
+										<label htmlFor="email" className="form-label fw-bold">
 											Email address
 										</label>
 										<input
@@ -56,7 +56,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="phone" className="form-label">
+										<label htmlFor="phone" className="form-label fw-bold">
 											Phone number
 										</label>
 										<input
@@ -71,7 +71,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-12">
-										<label htmlFor="address" className="form-label">
+										<label htmlFor="address" className="form-label fw-bold">
 											Delivery address
 										</label>
 										<textarea
@@ -86,7 +86,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="city" className="form-label">
+										<label htmlFor="city" className="form-label fw-bold">
 											City
 										</label>
 										<input
@@ -101,7 +101,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="postalCode" className="form-label">
+										<label htmlFor="postalCode" className="form-label fw-bold">
 											Postal code
 										</label>
 										<input
@@ -116,7 +116,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-12">
-										<label htmlFor="discountCode" className="form-label">
+										<label htmlFor="discountCode" className="form-label fw-bold">
 											Discount code <span className="text-muted">(optional)</span>
 										</label>
 										<div className="input-group">
@@ -135,7 +135,7 @@ function Checkout() {
 
 									<div className="col-12">
 										<fieldset>
-											<legend className="form-label mb-2">Payment method</legend>
+											<legend className="form-label fw-bold mb-2">Payment method</legend>
 
 											<div className="form-check">
 												<input
@@ -146,7 +146,7 @@ function Checkout() {
 													className="form-check-input"
 													required
 												/>
-												<label htmlFor="cashOnDelivery" className="form-check-label">
+												<label htmlFor="cashOnDelivery" className="form-check-label fw-bold">
 													Cash on Delivery
 												</label>
 											</div>
@@ -159,7 +159,7 @@ function Checkout() {
 													value="card"
 													className="form-check-input"
 												/>
-												<label htmlFor="card" className="form-check-label">
+												<label htmlFor="card" className="form-check-label fw-bold">
 													Card
 												</label>
 											</div>
@@ -167,7 +167,7 @@ function Checkout() {
 									</div>
 
 									<div className="col-12">
-										<label htmlFor="orderNotes" className="form-label">
+										<label htmlFor="orderNotes" className="form-label fw-bold">
 											Order notes / delivery instructions <span className="text-muted">(optional)</span>
 										</label>
 										<textarea
