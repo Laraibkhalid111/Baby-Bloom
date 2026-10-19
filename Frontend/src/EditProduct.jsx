@@ -1,4 +1,24 @@
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const editProductSchema = z.object({
+  product: z.string().min(1, 'Product selection is required'),
+  productName: z.string().trim().min(1, 'Product name is required'),
+  category: z.string().min(1, 'Product category is required'),
+  sizeWeight: z.string().trim().min(1, 'Product size is required'),
+  description: z.string().trim().min(1, 'Product description is required'),
+  price: z.coerce.number().min(0, 'Price must be a non-negative number'),
+  stockQuantity: z.coerce.number().int().min(0, 'Stock quantity must be a non-negative integer'),
+  productImage: z.any().optional()
+})
+
 function EditProduct() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(editProductSchema) })
+
+  function onSubmit(data) {
+    console.log('form submitted', data)
+  }
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -8,13 +28,13 @@ function EditProduct() {
               <h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
               <p className="text-center text-muted mb-4">Edit a product in the catalogue</p>
 
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="row g-3">
                   <div className="col-12">
                     <label htmlFor="product" className="form-label fw-bold">
                       Select product
                     </label>
-                    <select id="product" name="product" className="form-select" defaultValue="" required>
+                    <select id="product" name="product" className="form-select" defaultValue="" {...register("product")}>
                       <option value="" disabled>
                         Select a product to edit
                       </option>
@@ -23,6 +43,7 @@ function EditProduct() {
                       <option value="baby-oil">Baby Oil</option>
                       <option value="baby-powder">Baby Powder</option>
                     </select>
+                    {errors.product && <span className="text-danger d-block">{errors.product.message}</span>}
                   </div>
 
                   <div className="col-12">
@@ -34,16 +55,15 @@ function EditProduct() {
                       id="productName"
                       name="productName"
                       className="form-control"
-                      placeholder="Enter the product name"
-                      required
-                    />
+                      placeholder="Enter the product name" {...register("productName")} />
+                    {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
                   </div>
 
                   <div className="col-md-6">
                     <label htmlFor="category" className="form-label fw-bold">
                       Product category
                     </label>
-                    <select id="category" name="category" className="form-select" defaultValue="" required>
+                    <select id="category" name="category" className="form-select" defaultValue="" {...register("category")}>
                       <option value="" disabled>
                         Select a category
                       </option>
@@ -52,6 +72,7 @@ function EditProduct() {
                       <option value="baby-hair-care">Baby Hair Care</option>
                       <option value="baby-accessories">Baby Accessories</option>
                     </select>
+                    {errors.category && <span className="text-danger d-block">{errors.category.message}</span>}
                   </div>
 
                   <div className="col-md-6">
@@ -63,9 +84,8 @@ function EditProduct() {
                       id="sizeWeight"
                       name="sizeWeight"
                       className="form-control"
-                      placeholder="For example, 250 ml or 1 pack"
-                      required
-                    />
+                      placeholder="For example, 250 ml or 1 pack" {...register("sizeWeight")} />
+                    {errors.sizeWeight && <span className="text-danger d-block">{errors.sizeWeight.message}</span>}
                   </div>
 
                   <div className="col-12">
@@ -78,8 +98,8 @@ function EditProduct() {
                       className="form-control"
                       rows="4"
                       placeholder="Update the product description"
-                      required
-                    ></textarea>
+                     {...register("description")}></textarea>
+                    {errors.description && <span className="text-danger d-block">{errors.description.message}</span>}
                   </div>
 
                   <div className="col-md-6">
@@ -95,9 +115,8 @@ function EditProduct() {
                         className="form-control"
                         placeholder="0.00"
                         min="0"
-                        step="0.01"
-                        required
-                      />
+                        step="0.01" {...register("price", { valueAsNumber: true })} />
+                    {errors.price && <span className="text-danger d-block">{errors.price.message}</span>}
                     </div>
                   </div>
 
@@ -112,9 +131,8 @@ function EditProduct() {
                       className="form-control"
                       placeholder="Enter available quantity"
                       min="0"
-                      step="1"
-                      required
-                    />
+                      step="1" {...register("stockQuantity", { valueAsNumber: true })} />
+                    {errors.stockQuantity && <span className="text-danger d-block">{errors.stockQuantity.message}</span>}
                   </div>
 
                   <div className="col-12">
@@ -126,8 +144,8 @@ function EditProduct() {
                       id="productImage"
                       name="productImage"
                       className="form-control"
-                      accept="image/*"
-                    />
+                      accept="image/*" {...register("productImage")} />
+                    {errors.productImage && <span className="text-danger d-block">{errors.productImage.message}</span>}
                     <div className="form-text">Choose a new image only if you want to replace the current one.</div>
                   </div>
                 </div>

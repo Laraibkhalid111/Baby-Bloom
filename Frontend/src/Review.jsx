@@ -1,4 +1,20 @@
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const reviewSchema = z.object({
+  productName: z.string().trim().min(1, 'Product name is required'),
+  customerName: z.string().trim().min(1, 'Customer name is required'),
+  rating: z.string().min(1, 'Rating is required'),
+  feedback: z.string().trim().min(1, 'Review / feedback is required')
+})
+
 function Review() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(reviewSchema) })
+
+  function onSubmit(data) {
+    console.log('form submitted', data)
+  }
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -8,7 +24,7 @@ function Review() {
               <h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
               <p className="text-center text-muted mb-4">Share your product experience</p>
 
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                   <label htmlFor="productName" className="form-label fw-bold">
                     Product name
@@ -18,9 +34,8 @@ function Review() {
                     id="productName"
                     name="productName"
                     className="form-control"
-                    placeholder="Enter the product name"
-                    required
-                  />
+                    placeholder="Enter the product name" {...register("productName")} />
+                    {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
                 </div>
 
                 <div className="mb-3">
@@ -33,16 +48,15 @@ function Review() {
                     name="customerName"
                     className="form-control"
                     placeholder="Enter your name"
-                    autoComplete="name"
-                    required
-                  />
+                    autoComplete="name" {...register("customerName")} />
+                    {errors.customerName && <span className="text-danger d-block">{errors.customerName.message}</span>}
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="rating" className="form-label fw-bold">
                     Rating
                   </label>
-                  <select id="rating" name="rating" className="form-select" required defaultValue="">
+                  <select id="rating" name="rating" className="form-select" defaultValue="" {...register("rating")}>
                     <option value="" disabled>
                       Choose a star rating
                     </option>
@@ -52,6 +66,7 @@ function Review() {
                     <option value="4">4 Stars</option>
                     <option value="5">5 Stars</option>
                   </select>
+                    {errors.rating && <span className="text-danger d-block">{errors.rating.message}</span>}
                 </div>
 
                 <div className="mb-4">
@@ -64,8 +79,8 @@ function Review() {
                     className="form-control"
                     rows="5"
                     placeholder="Tell us about your experience with this product"
-                    required
-                  ></textarea>
+                   {...register("feedback")}></textarea>
+                    {errors.feedback && <span className="text-danger d-block">{errors.feedback.message}</span>}
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100">

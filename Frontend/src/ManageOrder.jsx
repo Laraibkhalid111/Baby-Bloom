@@ -1,4 +1,21 @@
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const manageOrderSchema = z.object({
+  orderId: z.string().trim().min(1, 'Order ID is required'),
+  customerName: z.string().trim().min(1, 'Customer name is required'),
+  productName: z.string().trim().min(1, 'Product name is required'),
+  orderStatus: z.string().min(1, 'Order status is required'),
+  rider: z.string().min(1, 'Rider is required')
+})
+
 function ManageOrder() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(manageOrderSchema) })
+
+  function onSubmit(data) {
+    console.log('form submitted', data)
+  }
   return (
     <div
       className="container py-5"
@@ -10,7 +27,7 @@ function ManageOrder() {
             <h2 className="h4 mb-0">Manage Order</h2>
           </div>
 
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="table-responsive">
               <table className="table table-bordered align-middle mb-0">
                 <thead>
@@ -33,9 +50,8 @@ function ManageOrder() {
                         type="text"
                         id="orderId"
                         name="orderId"
-                        className="form-control"
-                        required
-                      />
+                        className="form-control" {...register("orderId")} />
+                    {errors.orderId && <span className="text-danger d-block">{errors.orderId.message}</span>}
                     </td>
                     <td>
                       <label className="visually-hidden" htmlFor="customerName">
@@ -45,9 +61,8 @@ function ManageOrder() {
                         type="text"
                         id="customerName"
                         name="customerName"
-                        className="form-control"
-                        required
-                      />
+                        className="form-control" {...register("customerName")} />
+                    {errors.customerName && <span className="text-danger d-block">{errors.customerName.message}</span>}
                     </td>
                     <td>
                       <label className="visually-hidden" htmlFor="productName">
@@ -57,9 +72,8 @@ function ManageOrder() {
                         type="text"
                         id="productName"
                         name="productName"
-                        className="form-control"
-                        required
-                      />
+                        className="form-control" {...register("productName")} />
+                    {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
                     </td>
                     <td>
                       <label className="visually-hidden" htmlFor="orderStatus">
@@ -70,8 +84,7 @@ function ManageOrder() {
                         name="orderStatus"
                         className="form-select"
                         defaultValue=""
-                        required
-                      >
+                       {...register("orderStatus")}>
                         <option value="" disabled>
                           Select a status
                         </option>
@@ -81,6 +94,7 @@ function ManageOrder() {
                         <option value="delivered">Delivered</option>
                         <option value="cancelled">Cancelled</option>
                       </select>
+                    {errors.orderStatus && <span className="text-danger d-block">{errors.orderStatus.message}</span>}
                     </td>
                     <td>
                       <label className="visually-hidden" htmlFor="rider">
@@ -91,8 +105,7 @@ function ManageOrder() {
                         name="rider"
                         className="form-select"
                         defaultValue=""
-                        required
-                      >
+                       {...register("rider")}>
                         <option value="" disabled>
                           Select rider
                         </option>
@@ -100,6 +113,7 @@ function ManageOrder() {
                         <option value="rider-2">Rider 2</option>
                         <option value="rider-3">Rider 3</option>
                       </select>
+                    {errors.rider && <span className="text-danger d-block">{errors.rider.message}</span>}
                     </td>
                     <td>
                       <button type="submit" className="btn btn-primary text-nowrap">

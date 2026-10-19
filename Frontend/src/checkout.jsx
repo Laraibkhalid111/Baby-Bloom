@@ -1,4 +1,26 @@
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const checkoutSchema = z.object({
+  fullName: z.string().trim().min(1, 'Full name is required'),
+  province: z.string().trim().min(1, 'Province is required'),
+  email: z.string().trim().email('Enter a valid email address'),
+  phone: z.string().trim().min(1, 'Phone number is required'),
+  address: z.string().trim().min(1, 'Delivery address is required'),
+  city: z.string().trim().min(1, 'City is required'),
+  postalCode: z.string().trim().min(1, 'Postal code is required'),
+  discountCode: z.string().optional(),
+  paymentMethod: z.string().min(1, 'Payment method is required'),
+  orderNotes: z.string().optional()
+})
+
 function Checkout() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(checkoutSchema) })
+
+  function onSubmit(data) {
+    console.log('form submitted', data)
+  }
 	return (
 		<div className="container py-5">
 			<div className="row justify-content-center">
@@ -8,7 +30,7 @@ function Checkout() {
 							<h1 className="h3 text-center text-primary mb-2">Baby Bloom Checkout</h1>
 							<p className="text-center text-muted mb-4">Enter your details to place your order</p>
 
-							<form>
+							<form onSubmit={handleSubmit(onSubmit)}>
 								<div className="row g-3">
 									<div className="col-md-6">
 										<label htmlFor="fullName" className="form-label fw-bold">
@@ -20,9 +42,8 @@ function Checkout() {
 											name="fullName"
 											className="form-control"
 											placeholder="Enter your full name"
-											autoComplete="name"
-											required
-										/>
+											autoComplete="name" {...register("fullName")} />
+                    {errors.fullName && <span className="text-danger d-block">{errors.fullName.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -35,9 +56,8 @@ function Checkout() {
 											name="province"
 											className="form-control"
 											placeholder="Enter your province"
-											autoComplete="address-level1"
-											required
-										/>
+											autoComplete="address-level1" {...register("province")} />
+                    {errors.province && <span className="text-danger d-block">{errors.province.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -50,9 +70,8 @@ function Checkout() {
 											name="email"
 											className="form-control"
 											placeholder="Enter your email"
-											autoComplete="email"
-											required
-										/>
+											autoComplete="email" {...register("email")} />
+                    {errors.email && <span className="text-danger d-block">{errors.email.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -65,9 +84,8 @@ function Checkout() {
 											name="phone"
 											className="form-control"
 											placeholder="Enter your phone number"
-											autoComplete="tel"
-											required
-										/>
+											autoComplete="tel" {...register("phone")} />
+                    {errors.phone && <span className="text-danger d-block">{errors.phone.message}</span>}
 									</div>
 
 									<div className="col-12">
@@ -81,8 +99,8 @@ function Checkout() {
 											rows="3"
 											placeholder="Enter your complete delivery address"
 											autoComplete="street-address"
-											required
-										></textarea>
+										 {...register("address")}></textarea>
+                    {errors.address && <span className="text-danger d-block">{errors.address.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -95,9 +113,8 @@ function Checkout() {
 											name="city"
 											className="form-control"
 											placeholder="Enter your city"
-											autoComplete="address-level2"
-											required
-										/>
+											autoComplete="address-level2" {...register("city")} />
+                    {errors.city && <span className="text-danger d-block">{errors.city.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -110,9 +127,8 @@ function Checkout() {
 											name="postalCode"
 											className="form-control"
 											placeholder="Enter your postal code"
-											autoComplete="postal-code"
-											required
-										/>
+											autoComplete="postal-code" {...register("postalCode")} />
+                    {errors.postalCode && <span className="text-danger d-block">{errors.postalCode.message}</span>}
 									</div>
 
 									<div className="col-12">
@@ -125,8 +141,8 @@ function Checkout() {
 												id="discountCode"
 												name="discountCode"
 												className="form-control"
-												placeholder="Enter discount code"
-											/>
+												placeholder="Enter discount code" {...register("discountCode")} />
+                    {errors.discountCode && <span className="text-danger d-block">{errors.discountCode.message}</span>}
 											<button type="button" className="btn btn-outline-primary">
 												Apply Discount
 											</button>
@@ -143,9 +159,8 @@ function Checkout() {
 													id="cashOnDelivery"
 													name="paymentMethod"
 													value="cash-on-delivery"
-													className="form-check-input"
-													required
-												/>
+													className="form-check-input" {...register("paymentMethod")} />
+                    {errors.paymentMethod && <span className="text-danger d-block">{errors.paymentMethod.message}</span>}
 												<label htmlFor="cashOnDelivery" className="form-check-label fw-bold">
 													Cash on Delivery
 												</label>
@@ -157,8 +172,8 @@ function Checkout() {
 													id="card"
 													name="paymentMethod"
 													value="card"
-													className="form-check-input"
-												/>
+													className="form-check-input" {...register("paymentMethod")} />
+                    {errors.paymentMethod && <span className="text-danger d-block">{errors.paymentMethod.message}</span>}
 												<label htmlFor="card" className="form-check-label fw-bold">
 													Card
 												</label>
@@ -176,7 +191,8 @@ function Checkout() {
 											className="form-control"
 											rows="3"
 											placeholder="Add any delivery instructions"
-										></textarea>
+										 {...register("orderNotes")}></textarea>
+                    {errors.orderNotes && <span className="text-danger d-block">{errors.orderNotes.message}</span>}
 									</div>
 								</div>
 

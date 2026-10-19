@@ -1,7 +1,21 @@
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const loginSchema = z.object({
+  email: z.string().trim().email('Enter a valid email address'),
+  password: z.string().min(1, 'Password is required')
+})
+
 import { Link } from 'react-router-dom'
 import { Navbar } from './App.jsx'
 
 function Login() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginSchema) })
+
+  function onSubmit(data) {
+    console.log('form submitted', data)
+  }
 	return (
 		<>
 			<Navbar />
@@ -13,7 +27,7 @@ function Login() {
 							<h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
 							<p className="text-center text-muted mb-4">Welcome back</p>
 
-							<form>
+							<form onSubmit={handleSubmit(onSubmit)}>
 								<div className="mb-3">
 									<label htmlFor="email" className="form-label fw-bold">
 										Email address
@@ -23,9 +37,8 @@ function Login() {
 										id="email"
 										name="email"
 										className="form-control"
-										placeholder="Enter your email"
-										required
-									/>
+										placeholder="Enter your email" {...register("email")} />
+                    {errors.email && <span className="text-danger d-block">{errors.email.message}</span>}
 								</div>
 
 								<div className="mb-3">
@@ -37,9 +50,8 @@ function Login() {
 										id="password"
 										name="password"
 										className="form-control"
-										placeholder="Enter your password"
-										required
-									/>
+										placeholder="Enter your password" {...register("password")} />
+                    {errors.password && <span className="text-danger d-block">{errors.password.message}</span>}
 								</div>
 
 								<div className="text-end mb-4">
