@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { addProductAxiosFunction } from "./api";
 
 const productSchema = z.object({
   productName: z.string().min(1, "Product name is required").max(15, "Product name cannot exceed 15 characters"),
@@ -9,7 +10,6 @@ const productSchema = z.object({
   productDescription: z.string().min(1, "Product description is required").max(200, "Product description cannot exceed 200 characters"),
   productPrice: z.number().min(0, "Price must be a positive number").max(5 , "Price cannot exceed 5 characters"),
   productStock: z.number().min(0, "Stock must be a non-negative number").max(5, "Stock cannot exceed 5 characters"),
-  productImage: z.any().refine(file => file instanceof File, "Product image is required").refine(file => !(file instanceof File) || file.size <= 5 * 1024 * 1024, "File size must be less than or equal to 5MB")
 });
 
 function AddProduct() {
@@ -17,8 +17,10 @@ function AddProduct() {
     resolver: zodResolver(productSchema)
   });
   
-  function myFormSubmissionFucntion(data){
-    console.log(" form submitted",data);
+  
+     async function myFormSubmissionFunction(data) {
+    console.log("Form submitted.", data);
+    await addProductAxiosFunction(data);
   }
 
   return (
@@ -30,7 +32,7 @@ function AddProduct() {
               <h1 className="h3 text-center text-primary mb-2">Baby Bloom</h1>
               <p className="text-center text-muted mb-4">Add a new product to the catalogue</p>
 
-              <form onSubmit={handleSubmit(myFormSubmissionFucntion)}>
+              <form onSubmit={handleSubmit(myFormSubmissionFunction)}>
                 <div className="row g-3">
                   <div className="col-12">
                     <label htmlFor="productName" className="form-label fw-bold">
@@ -46,7 +48,7 @@ function AddProduct() {
 
                     />
                     {errors.productName &&(
-                      <span class ="text-danger">Product name is required</span>
+                      <span className ="text-danger">Product name is required</span>
                     )}
                   </div>
 
@@ -69,7 +71,7 @@ function AddProduct() {
                       <option value="baby-accessories">Baby Accessories</option>
                     </select>
                     {errors.productCategory &&(
-                      <span class ="text-danger">Product category is required</span>
+                      <span className ="text-danger">Product category is required</span>
                     )}
                   </div>
 
@@ -87,7 +89,7 @@ function AddProduct() {
 
                     />
                     {errors.productSize &&(
-                      <span class ="text-danger">Product size is required</span>
+                      <span className ="text-danger">Product size is required</span>
                     )}
                   </div>
 
@@ -106,7 +108,7 @@ function AddProduct() {
                     />
                     
                     {errors.productDescription &&(
-                      <span class ="text-danger">Product description is required</span>
+                      <span className ="text-danger">Product description is required</span>
                     )}
                   </div>
 
@@ -128,7 +130,7 @@ function AddProduct() {
 
                     />
                       {errors.productPrice &&(
-                      <span class ="text-danger">Price is required</span>
+                      <span className ="text-danger">Price is required</span>
                     )}
                     </div>
                   </div>
@@ -149,12 +151,12 @@ function AddProduct() {
 
                     />
                       {errors.productStock &&(
-                      <span class ="text-danger">Stock quantity is required</span>
+                      <span className ="text-danger">Stock quantity is required</span>
                     )}
                   
                   </div>
 
-                  <div className="col-12">
+                  {/* <div className="col-12">
                     <label htmlFor="productImage" className="form-label fw-bold">
                       Product image
                     </label>
@@ -168,10 +170,10 @@ function AddProduct() {
 
                     />
                     {errors.productImage &&(
-                      <span class ="text-danger">Product image is required</span>
+                      <span className ="text-danger">Product image is required</span>
                     )}
                   
-                  </div>
+                  </div> */}
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100 mt-4">
