@@ -1,25 +1,24 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitCheckout } from './api.jsx'
 
 const checkoutSchema = z.object({
   fullName: z.string().trim().min(1, 'Full name is required'),
-  province: z.string().trim().min(1, 'Province is required'),
   email: z.string().trim().email('Enter a valid email address'),
   phone: z.string().trim().min(1, 'Phone number is required'),
   address: z.string().trim().min(1, 'Delivery address is required'),
   city: z.string().trim().min(1, 'City is required'),
-  postalCode: z.string().trim().min(1, 'Postal code is required'),
-  discountCode: z.string().optional(),
-  paymentMethod: z.string().min(1, 'Payment method is required'),
-  orderNotes: z.string().optional()
+  area: z.string().trim().min(1, 'Area / locality is required'),
+  paymentMethod: z.enum(["cash-on-delivery"], { error: 'Payment method is required' }),
+  deliveryInstructions: z.string().optional()
 })
 
 function Checkout() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(checkoutSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitCheckout(data)
   }
 	return (
 		<div className="container py-5">
@@ -42,22 +41,8 @@ function Checkout() {
 											name="fullName"
 											className="form-control"
 											placeholder="Enter your full name"
-											autoComplete="name" {...register("fullName")} />
+											autoComplete="name" required {...register("fullName")} />
                     {errors.fullName && <span className="text-danger d-block">{errors.fullName.message}</span>}
-									</div>
-
-									<div className="col-md-6">
-										<label htmlFor="province" className="form-label fw-bold">
-											Province
-										</label>
-										<input
-											type="text"
-											id="province"
-											name="province"
-											className="form-control"
-											placeholder="Enter your province"
-											autoComplete="address-level1" {...register("province")} />
-                    {errors.province && <span className="text-danger d-block">{errors.province.message}</span>}
 									</div>
 
 									<div className="col-md-6">
@@ -70,7 +55,7 @@ function Checkout() {
 											name="email"
 											className="form-control"
 											placeholder="Enter your email"
-											autoComplete="email" {...register("email")} />
+											autoComplete="email" required {...register("email")} />
                     {errors.email && <span className="text-danger d-block">{errors.email.message}</span>}
 									</div>
 
@@ -84,7 +69,7 @@ function Checkout() {
 											name="phone"
 											className="form-control"
 											placeholder="Enter your phone number"
-											autoComplete="tel" {...register("phone")} />
+											autoComplete="tel" required {...register("phone")} />
                     {errors.phone && <span className="text-danger d-block">{errors.phone.message}</span>}
 									</div>
 
@@ -99,6 +84,7 @@ function Checkout() {
 											rows="3"
 											placeholder="Enter your complete delivery address"
 											autoComplete="street-address"
+											required
 										 {...register("address")}></textarea>
                     {errors.address && <span className="text-danger d-block">{errors.address.message}</span>}
 									</div>
@@ -113,86 +99,41 @@ function Checkout() {
 											name="city"
 											className="form-control"
 											placeholder="Enter your city"
-											autoComplete="address-level2" {...register("city")} />
+											autoComplete="address-level2" required {...register("city")} />
                     {errors.city && <span className="text-danger d-block">{errors.city.message}</span>}
 									</div>
 
-									<div className="col-md-6">
-										<label htmlFor="postalCode" className="form-label fw-bold">
-											Postal code
+									<div className="col-12">
+										<label htmlFor="area" className="form-label fw-bold">
+											Area / locality
 										</label>
-										<input
-											type="text"
-											id="postalCode"
-											name="postalCode"
-											className="form-control"
-											placeholder="Enter your postal code"
-											autoComplete="postal-code" {...register("postalCode")} />
-                    {errors.postalCode && <span className="text-danger d-block">{errors.postalCode.message}</span>}
+										<input type="text" id="area" name="area" className="form-control"
+											placeholder="Enter your area or locality" required {...register("area")} />
+                    {errors.area && <span className="text-danger d-block">{errors.area.message}</span>}
 									</div>
 
 									<div className="col-12">
-										<label htmlFor="discountCode" className="form-label fw-bold">
-											Discount code <span className="text-muted">(optional)</span>
-										</label>
-										<div className="input-group">
-											<input
-												type="text"
-												id="discountCode"
-												name="discountCode"
-												className="form-control"
-												placeholder="Enter discount code" {...register("discountCode")} />
-                    {errors.discountCode && <span className="text-danger d-block">{errors.discountCode.message}</span>}
-											<button type="button" className="btn btn-outline-primary">
-												Apply Discount
-											</button>
-										</div>
-									</div>
-
-									<div className="col-12">
-										<fieldset>
-											<legend className="form-label fw-bold mb-2">Payment method</legend>
-
-											<div className="form-check">
-												<input
-													type="radio"
-													id="cashOnDelivery"
-													name="paymentMethod"
-													value="cash-on-delivery"
-													className="form-check-input" {...register("paymentMethod")} />
+										<label htmlFor="paymentMethod" className="form-label fw-bold">Payment method</label>
+										<select id="paymentMethod" name="paymentMethod" className="form-select"
+											defaultValue="" required {...register("paymentMethod")}>
+											<option value="" disabled>Select a payment method</option>
+											<option value="cash-on-delivery">Cash on Delivery (COD)</option>
+										</select>
                     {errors.paymentMethod && <span className="text-danger d-block">{errors.paymentMethod.message}</span>}
-												<label htmlFor="cashOnDelivery" className="form-check-label fw-bold">
-													Cash on Delivery
-												</label>
-											</div>
-
-											<div className="form-check">
-												<input
-													type="radio"
-													id="card"
-													name="paymentMethod"
-													value="card"
-													className="form-check-input" {...register("paymentMethod")} />
-                    {errors.paymentMethod && <span className="text-danger d-block">{errors.paymentMethod.message}</span>}
-												<label htmlFor="card" className="form-check-label fw-bold">
-													Card
-												</label>
-											</div>
-										</fieldset>
 									</div>
 
 									<div className="col-12">
-										<label htmlFor="orderNotes" className="form-label fw-bold">
-											Order notes / delivery instructions <span className="text-muted">(optional)</span>
+										<label htmlFor="deliveryInstructions" className="form-label fw-bold">
+											Delivery instructions <span className="text-muted">(optional)</span>
 										</label>
 										<textarea
-											id="orderNotes"
-											name="orderNotes"
+											id="deliveryInstructions"
+											name="deliveryInstructions"
 											className="form-control"
 											rows="3"
 											placeholder="Add any delivery instructions"
-										 {...register("orderNotes")}></textarea>
-                    {errors.orderNotes && <span className="text-danger d-block">{errors.orderNotes.message}</span>}
+										 {...register("deliveryInstructions")}></textarea>
+                    {errors.deliveryInstructions && <span className="text-danger d-block">{errors.deliveryInstructions.message}</span>}
 									</div>
 								</div>
 

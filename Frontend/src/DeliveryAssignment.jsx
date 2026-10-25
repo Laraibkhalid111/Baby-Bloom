@@ -1,23 +1,18 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitDeliveryAssignment } from './api.jsx'
 
 const deliveryAssignmentSchema = z.object({
-  orderId: z.string().trim().min(1, 'Order ID is required'),
-  customerName: z.string().trim().min(1, 'Customer name is required'),
-  customerPhone: z.string().trim().min(1, 'Customer phone number is required'),
-  city: z.string().trim().min(1, 'City is required'),
-  deliveryAddress: z.string().trim().min(1, 'Delivery address is required'),
-  deliveryPerson: z.string().min(1, 'Delivery person is required'),
-  expectedDeliveryDate: z.string().min(1, 'Expected delivery date is required'),
-  deliveryNotes: z.string().optional()
+  deliveryPerson: z.enum(["sarah-johnson", "michael-brown", "amina-wilson", "david-lee"], { error: 'Delivery person is required' }),
+  assignmentDate: z.string().min(1, 'Assignment date is required')
 })
 
 function DeliveryAssignment() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(deliveryAssignmentSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitDeliveryAssignment(data)
   }
   return (
     <div className="container py-5">
@@ -34,68 +29,14 @@ function DeliveryAssignment() {
                     <label htmlFor="orderId" className="form-label fw-bold">
                       Order ID
                     </label>
-                    <input
-                      type="text"
+                    <select
                       id="orderId"
                       name="orderId"
-                      className="form-control"
-                      placeholder="Enter the order ID" {...register("orderId")} />
+                      className="form-select"
+                      defaultValue="" required {...register("orderId")}>
+                      <option value="" disabled>Select an order</option>
+                    </select>
                     {errors.orderId && <span className="text-danger d-block">{errors.orderId.message}</span>}
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="customerName" className="form-label fw-bold">
-                      Customer name
-                    </label>
-                    <input
-                      type="text"
-                      id="customerName"
-                      name="customerName"
-                      className="form-control"
-                      placeholder="Enter the customer name" {...register("customerName")} />
-                    {errors.customerName && <span className="text-danger d-block">{errors.customerName.message}</span>}
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="customerPhone" className="form-label fw-bold">
-                      Customer phone number
-                    </label>
-                    <input
-                      type="tel"
-                      id="customerPhone"
-                      name="customerPhone"
-                      className="form-control"
-                      placeholder="Enter the customer phone number"
-                      autoComplete="tel" {...register("customerPhone")} />
-                    {errors.customerPhone && <span className="text-danger d-block">{errors.customerPhone.message}</span>}
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="city" className="form-label fw-bold">
-                      City
-                    </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      className="form-control"
-                      placeholder="Enter the delivery city" {...register("city")} />
-                    {errors.city && <span className="text-danger d-block">{errors.city.message}</span>}
-                  </div>
-
-                  <div className="col-12">
-                    <label htmlFor="deliveryAddress" className="form-label fw-bold">
-                      Delivery address
-                    </label>
-                    <textarea
-                      id="deliveryAddress"
-                      name="deliveryAddress"
-                      className="form-control"
-                      rows="3"
-                      placeholder="Enter the complete delivery address"
-                      autoComplete="street-address"
-                     {...register("deliveryAddress")}></textarea>
-                    {errors.deliveryAddress && <span className="text-danger d-block">{errors.deliveryAddress.message}</span>}
                   </div>
 
                   <div className="col-md-6">
@@ -107,7 +48,7 @@ function DeliveryAssignment() {
                       name="deliveryPerson"
                       className="form-select"
                       defaultValue=""
-                     {...register("deliveryPerson")}>
+                     required {...register("deliveryPerson")}>
                       <option value="" disabled>
                         Select a delivery person
                       </option>
@@ -120,29 +61,15 @@ function DeliveryAssignment() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="expectedDeliveryDate" className="form-label fw-bold">
-                      Expected delivery date
+                    <label htmlFor="assignmentDate" className="form-label fw-bold">
+                      Assignment date
                     </label>
                     <input
                       type="date"
-                      id="expectedDeliveryDate"
-                      name="expectedDeliveryDate"
-                      className="form-control" {...register("expectedDeliveryDate")} />
-                    {errors.expectedDeliveryDate && <span className="text-danger d-block">{errors.expectedDeliveryDate.message}</span>}
-                  </div>
-
-                  <div className="col-12">
-                    <label htmlFor="deliveryNotes" className="form-label fw-bold">
-                      Delivery notes
-                    </label>
-                    <textarea
-                      id="deliveryNotes"
-                      name="deliveryNotes"
-                      className="form-control"
-                      rows="3"
-                      placeholder="Add any special delivery instructions"
-                     {...register("deliveryNotes")}></textarea>
-                    {errors.deliveryNotes && <span className="text-danger d-block">{errors.deliveryNotes.message}</span>}
+                      id="assignmentDate"
+                      name="assignmentDate"
+                      className="form-control" required {...register("assignmentDate")} />
+                    {errors.assignmentDate && <span className="text-danger d-block">{errors.assignmentDate.message}</span>}
                   </div>
                 </div>
 

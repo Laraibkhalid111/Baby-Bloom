@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitSignup } from './api.jsx'
 
 const signupSchema = z.object({
   fullName: z.string().trim().min(1, 'Full name is required'),
   email: z.string().trim().email('Enter a valid email address'),
   phone: z.string().trim().min(1, 'Phone number is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters'),
-  terms: z.literal(true, { errorMap: () => ({ message: 'You must agree to the Terms & Conditions' }) })
+  password: z.string().trim().min(1, 'Password is required'),
+  confirmPassword: z.string().trim().min(1, 'Confirm password is required')
 }).refine((data) => data.password === data.confirmPassword, { path: ['confirmPassword'], message: 'Passwords must match' })
 
 import { Link } from 'react-router-dom'
@@ -17,8 +17,8 @@ import { Navbar } from './App.jsx'
 function Signup() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(signupSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitSignup(data)
   }
 	return (
 		<>
@@ -42,7 +42,7 @@ function Signup() {
 										name="fullName"
 										className="form-control"
 										placeholder="Enter your full name"
-										autoComplete="name" {...register("fullName")} />
+										autoComplete="name" required {...register("fullName")} />
                     {errors.fullName && <span className="text-danger d-block">{errors.fullName.message}</span>}
 								</div>
 
@@ -56,7 +56,7 @@ function Signup() {
 										name="email"
 										className="form-control"
 										placeholder="Enter your email"
-										autoComplete="email" {...register("email")} />
+										autoComplete="email" required {...register("email")} />
                     {errors.email && <span className="text-danger d-block">{errors.email.message}</span>}
 								</div>
 
@@ -70,7 +70,7 @@ function Signup() {
 										name="phone"
 										className="form-control"
 										placeholder="Enter your phone number"
-										autoComplete="tel" {...register("phone")} />
+										autoComplete="tel" required {...register("phone")} />
                     {errors.phone && <span className="text-danger d-block">{errors.phone.message}</span>}
 								</div>
 
@@ -85,7 +85,7 @@ function Signup() {
 										className="form-control"
 										placeholder="Create a password"
 										autoComplete="new-password"
-										minLength="8" {...register("password")} />
+										required {...register("password")} />
                     {errors.password && <span className="text-danger d-block">{errors.password.message}</span>}
 								</div>
 
@@ -100,20 +100,8 @@ function Signup() {
 										className="form-control"
 										placeholder="Confirm your password"
 										autoComplete="new-password"
-										minLength="8" {...register("confirmPassword")} />
+										required {...register("confirmPassword")} />
                     {errors.confirmPassword && <span className="text-danger d-block">{errors.confirmPassword.message}</span>}
-								</div>
-
-								<div className="form-check mb-4">
-									<input
-										type="checkbox"
-										id="terms"
-										name="terms"
-										className="form-check-input" {...register("terms")} />
-                    {errors.terms && <span className="text-danger d-block">{errors.terms.message}</span>}
-									<label htmlFor="terms" className="form-check-label fw-bold">
-										I agree to the Terms &amp; Conditions
-									</label>
 								</div>
 
 								<button type="submit" className="btn btn-primary w-100">

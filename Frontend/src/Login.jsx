@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitLogin } from './api.jsx'
 
 const loginSchema = z.object({
   email: z.string().trim().email('Enter a valid email address'),
@@ -13,8 +14,8 @@ import { Navbar } from './App.jsx'
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitLogin(data)
   }
 	return (
 		<>
@@ -37,7 +38,7 @@ function Login() {
 										id="email"
 										name="email"
 										className="form-control"
-										placeholder="Enter your email" {...register("email")} />
+										placeholder="Enter your email" required {...register("email")} />
                     {errors.email && <span className="text-danger d-block">{errors.email.message}</span>}
 								</div>
 
@@ -50,7 +51,7 @@ function Login() {
 										id="password"
 										name="password"
 										className="form-control"
-										placeholder="Enter your password" {...register("password")} />
+										placeholder="Enter your password" required {...register("password")} />
                     {errors.password && <span className="text-danger d-block">{errors.password.message}</span>}
 								</div>
 

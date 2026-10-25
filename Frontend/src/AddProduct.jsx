@@ -4,12 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addProductAxiosFunction } from "./api";
 
 const productSchema = z.object({
-  productName: z.string().min(1, "Product name is required").max(15, "Product name cannot exceed 15 characters"),
-  productSize: z.string().min(1, "Product size is required").max(5, "Product size cannot exceed 5 characters"),
-  productCategory: z.string().min(1, "Product category is required").max(20, "Product category cannot exceed 20 characters"),
-  productDescription: z.string().min(1, "Product description is required").max(200, "Product description cannot exceed 200 characters"),
-  productPrice: z.number().min(0, "Price must be a positive number").max(5 , "Price cannot exceed 5 characters"),
-  productStock: z.number().min(0, "Stock must be a non-negative number").max(5, "Stock cannot exceed 5 characters"),
+  productName: z.string().trim().min(1, "Product name is required"),
+  productCategory: z.enum(["diapers", "clothing", "feeding", "bath-skincare", "baby-accessories"], { error: "Product category is required" }),
+  productDescription: z.string().trim().min(1, "Product description is required"),
+  productPrice: z.number().min(0.01, "Price must be greater than zero"),
+  productStock: z.number().int().min(0, "Stock must be a non-negative integer"),
 });
 
 function AddProduct() {
@@ -44,7 +43,7 @@ function AddProduct() {
                       name="productName"
                       className="form-control"
                       placeholder="Enter the product name"
-                      {...register("productName", { required: true })} 
+                      required {...register("productName", { required: true })}
 
                     />
                     {errors.productName &&(
@@ -53,43 +52,26 @@ function AddProduct() {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="category" className="form-label fw-bold">
+                    <label htmlFor="productCategory" className="form-label fw-bold">
                       Product category
                     </label>
                     <select
-                      id="category"
+                      id="productCategory"
                       className="form-select"
                       defaultValue=""
-                      {...register("productCategory", { required: true })}
+                      required {...register("productCategory", { required: true })}
                     >
                       <option value="" disabled>
                         Select a category
                       </option>
-                      <option value="baby-bath">Baby Bath</option>
-                      <option value="baby-skin-care">Baby Skin Care</option>
-                      <option value="baby-hair-care">Baby Hair Care</option>
+                      <option value="diapers">Diapers</option>
+                      <option value="clothing">Clothing</option>
+                      <option value="feeding">Feeding</option>
+                      <option value="bath-skincare">Bath Skincare</option>
                       <option value="baby-accessories">Baby Accessories</option>
                     </select>
                     {errors.productCategory &&(
                       <span className ="text-danger">Product category is required</span>
-                    )}
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="sizeWeight" className="form-label fw-bold">
-                      Product size / weight
-                    </label>
-                    <input
-                      type="text"
-                      id="sizeWeight"
-                      name="sizeWeight"
-                      className="form-control"
-                      placeholder="For example, 250 ml or 1 pack"
-                       {...register("productSize", { required: true })} 
-
-                    />
-                    {errors.productSize &&(
-                      <span className ="text-danger">Product size is required</span>
                     )}
                   </div>
 
@@ -103,7 +85,7 @@ function AddProduct() {
                       className="form-control"
                       rows="4"
                       placeholder="Describe the product"
-                       {...register("productDescription", { required: true })} 
+                       required {...register("productDescription", { required: true })}
 
                     />
                     
@@ -117,16 +99,16 @@ function AddProduct() {
                       Price
                     </label>
                     <div className="input-group">
-                      <span className="input-group-text">$</span>
+                      <span className="input-group-text">PKR</span>
                       <input
                         type="number"
                         id="price"
                         name="price"
                         className="form-control"
-                        placeholder="0.00"
-                        min="0"
+                        placeholder="Enter the price"
+                        min="0.01"
                         step="0.01"
-                          {...register("productPrice", { valueAsNumber: true })}
+                        required {...register("productPrice", { valueAsNumber: true })}
 
                     />
                       {errors.productPrice &&(
@@ -147,7 +129,7 @@ function AddProduct() {
                       placeholder="Enter available quantity"
                       min="0"
                       step="1"
-                       {...register("productStock", { valueAsNumber: true })}
+                      required {...register("productStock", { valueAsNumber: true })}
 
                     />
                       {errors.productStock &&(
@@ -156,7 +138,7 @@ function AddProduct() {
                   
                   </div>
 
-                  {/* <div className="col-12">
+                  <div className="col-12">
                     <label htmlFor="productImage" className="form-label fw-bold">
                       Product image
                     </label>
@@ -173,7 +155,7 @@ function AddProduct() {
                       <span className ="text-danger">Product image is required</span>
                     )}
                   
-                  </div> */}
+                  </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100 mt-4">

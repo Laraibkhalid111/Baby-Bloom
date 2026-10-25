@@ -1,20 +1,17 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitManageOrder } from './api.jsx'
 
 const manageOrderSchema = z.object({
-  orderId: z.string().trim().min(1, 'Order ID is required'),
-  customerName: z.string().trim().min(1, 'Customer name is required'),
-  productName: z.string().trim().min(1, 'Product name is required'),
-  orderStatus: z.string().min(1, 'Order status is required'),
-  rider: z.string().min(1, 'Rider is required')
+  rider: z.enum(["rider-1", "rider-2", "rider-3"], { error: 'Rider is required' })
 })
 
 function ManageOrder() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(manageOrderSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitManageOrder(data)
   }
   return (
     <div
@@ -34,9 +31,11 @@ function ManageOrder() {
                   <tr>
                     <th scope="col">Order ID</th>
                     <th scope="col">Customer Name</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Order Status</th>
-                    <th scope="col">Assign Rider</th>
+                    <th scope="col">Products Quantities</th>
+                    <th scope="col">Total (PKR)</th>
+                    <th scope="col">Payment Method / Status</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Delivery Person</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -46,69 +45,42 @@ function ManageOrder() {
                       <label className="visually-hidden" htmlFor="orderId">
                         Order ID
                       </label>
-                      <input
-                        type="text"
+                      <select
                         id="orderId"
                         name="orderId"
-                        className="form-control" {...register("orderId")} />
+                        className="form-select"
+                        defaultValue=""
+                        required {...register("orderId")}>
+                        <option value="" disabled>Select an order</option>
+                      </select>
                     {errors.orderId && <span className="text-danger d-block">{errors.orderId.message}</span>}
                     </td>
                     <td>
-                      <label className="visually-hidden" htmlFor="customerName">
-                        Customer Name
-                      </label>
-                      <input
-                        type="text"
-                        id="customerName"
-                        name="customerName"
-                        className="form-control" {...register("customerName")} />
-                    {errors.customerName && <span className="text-danger d-block">{errors.customerName.message}</span>}
+                      No order data available
                     </td>
                     <td>
                       <label className="visually-hidden" htmlFor="productName">
                         Product Name
                       </label>
-                      <input
-                        type="text"
-                        id="productName"
-                        name="productName"
-                        className="form-control" {...register("productName")} />
-                    {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
+                      No order data available
                     </td>
                     <td>
-                      <label className="visually-hidden" htmlFor="orderStatus">
-                        Order Status
-                      </label>
-                      <select
-                        id="orderStatus"
-                        name="orderStatus"
-                        className="form-select"
-                        defaultValue=""
-                       {...register("orderStatus")}>
-                        <option value="" disabled>
-                          Select a status
-                        </option>
-                        <option value="pending">Pending</option>
-                        <option value="processing">Processing</option>
-                        <option value="shipped">Shipped</option>
-                        <option value="delivered">Delivered</option>
-                        <option value="cancelled">Cancelled</option>
-                      </select>
-                    {errors.orderStatus && <span className="text-danger d-block">{errors.orderStatus.message}</span>}
+                      No order data available
                     </td>
+                    <td>No order data available</td>
+                    <td>No order data available</td>
                     <td>
                       <label className="visually-hidden" htmlFor="rider">
-                        Assign Rider
+                        Delivery Person
                       </label>
                       <select
                         id="rider"
                         name="rider"
                         className="form-select"
                         defaultValue=""
+                        required
                        {...register("rider")}>
-                        <option value="" disabled>
-                          Select rider
-                        </option>
+                        <option value="" disabled>Select delivery person</option>
                         <option value="rider-1">Rider 1</option>
                         <option value="rider-2">Rider 2</option>
                         <option value="rider-3">Rider 3</option>

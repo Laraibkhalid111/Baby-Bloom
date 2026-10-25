@@ -1,21 +1,31 @@
 import mongoose from "mongoose";
-// structure is created inside a table . 
 const productSchema = new mongoose.Schema({
-   pid: {
-    type: String,
-    required: true,
-  },
   pname: {
     type: String,
     required: true,
-    },
-    pdescription: {
+  },
+  pcategory: {
     type: String,
-    required: true, 
-    },
-    pprice: {
+    enum: ["diapers", "clothing", "feeding", "bath-skincare", "baby-accessories"],
+    required: true,
+  },
+  pdescription: {
+    type: String,
+    required: true,
+  },
+  pprice: {
     type: Number,
     required: true,
-    }
+    min: 0.01,
+  },
+  pstock: {
+    type: Number,
+    required: true,
+    min: 0,
+    validate: Number.isInteger,
+  },
 })
- export default product;
+
+const product = mongoose.model("Product", productSchema);
+
+export default product;

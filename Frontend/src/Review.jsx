@@ -1,19 +1,19 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitReview } from './api.jsx'
 
 const reviewSchema = z.object({
-  productName: z.string().trim().min(1, 'Product name is required'),
-  customerName: z.string().trim().min(1, 'Customer name is required'),
-  rating: z.string().min(1, 'Rating is required'),
-  feedback: z.string().trim().min(1, 'Review / feedback is required')
+  productName: z.enum(["baby-shampoo", "baby-lotion", "baby-oil", "baby-powder"], { error: 'Product selection is required' }),
+  rating: z.enum(["1", "2", "3", "4", "5"], { error: 'Rating is required' }),
+  feedback: z.string().trim().min(1, 'Review is required')
 })
 
 function Review() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(reviewSchema) })
 
-  function onSubmit(data) {
-    console.log('form submitted', data)
+  async function onSubmit(data) {
+    await submitReview(data)
   }
   return (
     <div className="container py-5">
@@ -29,49 +29,46 @@ function Review() {
                   <label htmlFor="productName" className="form-label fw-bold">
                     Product name
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="productName"
                     name="productName"
-                    className="form-control"
-                    placeholder="Enter the product name" {...register("productName")} />
-                    {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="customerName" className="form-label fw-bold">
-                    Customer name
-                  </label>
-                  <input
-                    type="text"
-                    id="customerName"
-                    name="customerName"
-                    className="form-control"
-                    placeholder="Enter your name"
-                    autoComplete="name" {...register("customerName")} />
-                    {errors.customerName && <span className="text-danger d-block">{errors.customerName.message}</span>}
+                    className="form-select"
+                    defaultValue=""
+                    required
+                    {...register("productName")}>
+                    <option value="" disabled>Select a product</option>
+                    <option value="baby-shampoo">Baby Shampoo</option>
+                    <option value="baby-lotion">Baby Lotion</option>
+                    <option value="baby-oil">Baby Oil</option>
+                    <option value="baby-powder">Baby Powder</option>
+                  </select>
+                  {errors.productName && <span className="text-danger d-block">{errors.productName.message}</span>}
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="rating" className="form-label fw-bold">
-                    Rating
+                    Rating (1–5 Stars)
                   </label>
-                  <select id="rating" name="rating" className="form-select" defaultValue="" {...register("rating")}>
-                    <option value="" disabled>
-                      Choose a star rating
-                    </option>
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
+                  <select
+                    id="rating"
+                    name="rating"
+                    className="form-select"
+                    defaultValue=""
+                    required
+                    {...register("rating")}>
+                    <option value="" disabled>Choose a star rating</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </select>
-                    {errors.rating && <span className="text-danger d-block">{errors.rating.message}</span>}
+                  {errors.rating && <span className="text-danger d-block">{errors.rating.message}</span>}
                 </div>
 
                 <div className="mb-4">
                   <label htmlFor="feedback" className="form-label fw-bold">
-                    Review / feedback
+                    Write your review
                   </label>
                   <textarea
                     id="feedback"
@@ -79,8 +76,9 @@ function Review() {
                     className="form-control"
                     rows="5"
                     placeholder="Tell us about your experience with this product"
+                    required
                    {...register("feedback")}></textarea>
-                    {errors.feedback && <span className="text-danger d-block">{errors.feedback.message}</span>}
+                  {errors.feedback && <span className="text-danger d-block">{errors.feedback.message}</span>}
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100">
