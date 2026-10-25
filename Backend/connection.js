@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
 import productRoutes from "./routes/ProductRoutes.js";
 import formRoutes from "./routes/formRoutes.js";
+
+dotenv.config();
 
 
 const app = express();
@@ -19,7 +22,7 @@ app.listen(3000, () => {
 );
 
 mongoose.connect(
-  "mongodb+srv://laraibkhalid107_db_user:11196@cluster0.8aj6nsu.mongodb.net/",
+  process.env.MONGODB_URI,
 ).then(() => {
   console.log("Connected to MongoDB");
 }).catch((error) => {
