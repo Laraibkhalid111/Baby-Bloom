@@ -1,11 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 import productRoutes from "./routes/ProductRoutes.js";
 import formRoutes from "./routes/formRoutes.js";
-
-dotenv.config();
 
 
 const app = express();
@@ -21,9 +18,7 @@ app.listen(3000, () => {
 
 );
 
-mongoose.connect(
-  process.env.MONGODB_URI,
-).then(() => {
+mongoose.connect().then(() => {
   console.log("Connected to MongoDB");
 }).catch((error) => {
   console.error("Error connecting to MongoDB:", error);
