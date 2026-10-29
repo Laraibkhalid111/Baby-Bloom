@@ -1,14 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 import productRoutes from "./routes/admin/ProductRoutes.js";
 import userRoutes from "./routes/customer/userRoutes.js";
 import orderRoutes from "./routes/admin/orderRoutes.js";
 import deliveryRoutes from "./routes/deliveryRider/deliveryRoutes.js";
 import contactRoutes from "./routes/customer/contactRoutes.js";
 
-dotenv.config({ path: new URL("./.env", import.meta.url) });
+
 
 const app = express();
 app.use(cors());
