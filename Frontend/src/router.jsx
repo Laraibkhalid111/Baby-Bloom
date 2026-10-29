@@ -5,9 +5,10 @@ import App from './App.jsx'
 import Checkout from './checkout.jsx'
 import Contact from './Contact.jsx'
 import Customer from './Customer.jsx'
+import DeliveryStatus from './DeliveryStatus.jsx'
 import Delivery from './Delivery.jsx'
 import DeliveryAssignment from './DeliveryAssignment.jsx'
-import DeliveryInformation from './DeliveryInformation.jsx'
+
 import DeliveryStatus from './DeliveryStatus.jsx'
 import EditProduct from './EditProduct.jsx'
 import Login from './Login.jsx'
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
   { path: '/delivery', element: <Delivery /> },
   { path: '/delivery/assignment', element: <Delivery form={<DeliveryAssignment />} /> },
   { path: '/delivery/status', element: <Delivery form={<DeliveryStatus />} /> },
-  { path: '/delivery/information', element: <Delivery form={<DeliveryInformation />} /> },
+  
   { path: '/customer', element: <Customer /> },
   { path: '/customer/checkout', element: <Customer form={<Checkout />} /> },
   { path: '/customer/profile', element: <Navigate to="/customer" replace /> },

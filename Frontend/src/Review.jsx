@@ -1,7 +1,8 @@
+
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { submitReview } from './api.jsx'
+import axios from 'axios'
 
 const reviewSchema = z.object({
   productName: z.enum(["baby-shampoo", "baby-lotion", "baby-oil", "baby-powder"], { error: 'Product selection is required' }),
@@ -10,11 +11,13 @@ const reviewSchema = z.object({
 })
 
 function Review() {
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(reviewSchema) })
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(reviewSchema)
+  })
 
   async function onSubmit(data) {
-    await submitReview(data)
-  }
+     await submitReview(data)
+   }
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -77,7 +80,7 @@ function Review() {
                     rows="5"
                     placeholder="Tell us about your experience with this product"
                     required
-                   {...register("feedback")}></textarea>
+                    {...register("feedback")}></textarea>
                   {errors.feedback && <span className="text-danger d-block">{errors.feedback.message}</span>}
                 </div>
 

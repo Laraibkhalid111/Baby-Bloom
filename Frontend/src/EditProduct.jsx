@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { submitEditProduct } from './api.jsx'
+import { editProductAxiosFunction } from './api.jsx'
 
 const editProductSchema = z.object({
   product: z.enum(["baby-shampoo", "baby-lotion", "baby-oil", "baby-powder"], { error: 'Product selection is required' }),
@@ -17,7 +17,7 @@ function EditProduct() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(editProductSchema) })
 
   async function onSubmit(data) {
-    await submitEditProduct(data)
+    await editProductAxiosFunction(data)
   }
   return (
     <div className="container py-5">

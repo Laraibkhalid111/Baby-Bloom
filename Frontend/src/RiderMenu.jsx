@@ -9,9 +9,7 @@ function RiderMenu() {
       <Link className="nav-link text-primary" to="/delivery/status">
         Delivery Status
       </Link>
-      <Link className="nav-link text-primary" to="/delivery/information">
-        Delivery Information
-      </Link>
+      
     </div>
   )
 }

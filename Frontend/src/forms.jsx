@@ -7,7 +7,7 @@ import EditProduct from './EditProduct.jsx'
 import ManageOrder from './ManageOrder.jsx'
 import DeliveryAssignment from './DeliveryAssignment.jsx'
 import DeliveryStatus from './DeliveryStatus.jsx'
-import DeliveryInformation from './DeliveryInformation.jsx'
+
 import Contact from './Contact.jsx'
 
  function Forms() {
@@ -22,7 +22,6 @@ import Contact from './Contact.jsx'
   <ManageOrder/>
   <DeliveryAssignment/>
   <DeliveryStatus/>
-  <DeliveryInformation/>
   <Contact/>
   </>
   );
