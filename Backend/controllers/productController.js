@@ -1,4 +1,4 @@
-import Product from "../../models/admin/product.js";
+import Product from "../models/product.js";
 export const productController = async (req, res) => {
     console.log("POST request received at /AddProduct");
     console.log("request body", req.body);
