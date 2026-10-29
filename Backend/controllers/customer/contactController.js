@@ -1,42 +1,57 @@
+
 import Contact from "../../models/customer/Contact.js";
 
-export const addContact = async (req, res) => {
-  try {
-    const newContact = new Contact(req.body);
-    await newContact.save();
-    res.status(201).json({ message: "Contact message added successfully" });
-  } catch (error) {
-    console.error("Error adding contact message:", error);
-    res.status(500).json({ message: "Error adding contact message", error });
-  }
+// ADD CONTACT
+export const addContact = (req, res) => {
+  const {
+    fullName,
+    email,
+    subject,
+    message
+  } = req.body;
+
+  const newContact = new Contact({
+    fullName: fullName,
+    email: email,
+    subject: subject,
+    message: message
+  });
+
+  newContact.save()
+    .then(() => res.status(201).send("Contact message added successfully"))
+    .catch((error) => res.status(500).send("Error adding contact: " + error));
 };
 
-export const getContacts = async (req, res) => {
-  try {
-    const contacts = await Contact.find();
-    res.status(200).json(contacts);
-  } catch (error) {
-    console.error("Error getting contact messages:", error);
-    res.status(500).json({ message: "Error getting contact messages", error });
-  }
+
+// VIEW ALL CONTACTS
+export const getContacts = (req, res) => {
+  Contact.find()
+    .then((contacts) => res.status(200).send(contacts))
+    .catch((error) => res.status(500).send("Error getting contacts: " + error));
 };
 
-export const getContactById = async (req, res) => {
-  try {
-    const contact = await Contact.findById(req.params.id);
-    res.status(200).json(contact);
-  } catch (error) {
-    console.error("Error getting contact message:", error);
-    res.status(500).json({ message: "Error getting contact message", error });
-  }
+
+// VIEW ONE CONTACT
+export const getContactById = (req, res) => {
+  const { id } = req.params;
+
+  Contact.findById(id)
+    .then((contact) => res.status(200).send(contact))
+    .catch((error) => res.status(500).send("Error getting contact: " + error));
 };
 
-export const deleteContact = async (req, res) => {
-  try {
-    await Contact.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Contact message deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting contact message:", error);
-    res.status(500).json({ message: "Error deleting contact message", error });
-  }
+
+// DELETE CONTACT
+export const deleteContact = (req, res) => {
+  const { id } = req.params;
+
+  Contact.findOneAndDelete({ _id: id })
+    .then((contact) => {
+      if (!contact) {
+        return res.status(404).send("Contact not found");
+      }
+
+      res.status(200).send("Contact deleted successfully");
+    })
+    .catch((error) => res.status(500).send("Error deleting contact: " + error));
 };

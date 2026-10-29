@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -8,8 +9,8 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["customer", "admin", "rider"],
-    default: "customer",
-  },
+    default: "customer"
+  }
 });
 
 const User = mongoose.model("User", userSchema);

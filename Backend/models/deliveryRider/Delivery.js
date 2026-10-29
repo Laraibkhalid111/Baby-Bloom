@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const deliverySchema = new mongoose.Schema({
@@ -7,9 +8,9 @@ const deliverySchema = new mongoose.Schema({
   deliveryStatus: {
     type: String,
     enum: ["assigned", "picked-up", "out-for-delivery", "delivered", "delivery-failed"],
-    default: "assigned",
+    default: "assigned"
   },
-  deliveryNote: { type: String },
+  deliveryNote: { type: String }
 });
 
 const Delivery = mongoose.model("Delivery", deliverySchema);

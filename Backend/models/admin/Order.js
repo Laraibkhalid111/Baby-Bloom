@@ -1,11 +1,5 @@
-import mongoose from "mongoose";
 
-const orderItemSchema = new mongoose.Schema({
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
-  productName: { type: String, required: true },
-  quantity: { type: Number, required: true, min: 1 },
-  price: { type: Number, required: true, min: 0 },
-});
+import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
   customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -16,23 +10,18 @@ const orderSchema = new mongoose.Schema({
   city: { type: String, required: true },
   area: { type: String, required: true },
   deliveryInstructions: { type: String },
-  items: { type: [orderItemSchema], required: true },
-  totalAmount: { type: Number, required: true, min: 0 },
-  paymentMethod: {
-    type: String,
-    enum: ["cash-on-delivery"],
-    required: true,
-  },
-  paymentStatus: {
-    type: String,
-    enum: ["pending", "paid", "failed"],
-    default: "pending",
-  },
-  orderStatus: {
-    type: String,
-    enum: ["pending", "confirmed", "cancelled", "delivered"],
-    default: "pending",
-  },
+
+  items: [{
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+    productName: { type: String },
+    quantity: { type: Number },
+    price: { type: Number }
+  }],
+
+  totalAmount: { type: Number, required: true },
+  paymentMethod: { type: String, required: true },
+  paymentStatus: { type: String, default: "pending" },
+  orderStatus: { type: String, default: "pending" }
 });
 
 const Order = mongoose.model("Order", orderSchema);

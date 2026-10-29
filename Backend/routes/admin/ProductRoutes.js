@@ -1,9 +1,18 @@
- import express from "express";
- import{Router} from "express";
-import  productController  from "../../controllers/admin/productController.js";
 
- const router = express.Router();
+import express from "express";
 
- router.post("/AddProduct", productController);
+import {
+  productController,
+  editProductController,
+  deleteProductController
+} from "../../controllers/admin/productController.js";
 
- export default router;
+const router = express.Router();
+
+router.post("/AddProduct", productController);
+
+router.post("/edit", editProductController);
+
+router.delete("/", deleteProductController);
+
+export default router;

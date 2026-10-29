@@ -1,49 +1,79 @@
+
 import Delivery from "../../models/deliveryRider/Delivery.js";
 
-export const addDelivery = async (req, res) => {
-  try {
-    const newDelivery = new Delivery({
-      orderId: req.body.orderId,
-      riderId: req.body.riderId,
-      assignmentDate: req.body.assignmentDate,
-      deliveryStatus: req.body.deliveryStatus,
-      deliveryNote: req.body.deliveryNote,
-    });
+// ADD DELIVERY
+export const addDelivery = (req, res) => {
+  const {
+    orderId,
+    riderId,
+    assignmentDate,
+    deliveryStatus,
+    deliveryNote
+  } = req.body;
 
-    await newDelivery.save();
-    res.status(201).json({ message: "Delivery added successfully" });
-  } catch (error) {
-    console.error("Error adding delivery:", error);
-    res.status(500).json({ message: "Error adding delivery", error });
-  }
+  const newDelivery = new Delivery({
+    orderId: orderId,
+    riderId: riderId,
+    assignmentDate: assignmentDate,
+    deliveryStatus: deliveryStatus,
+    deliveryNote: deliveryNote
+  });
+
+  newDelivery.save()
+    .then(() => res.status(201).send("Delivery added successfully"))
+    .catch((error) => res.status(500).send("Error adding delivery: " + error));
 };
 
-export const getDeliveries = async (req, res) => {
-  try {
-    const deliveries = await Delivery.find();
-    res.status(200).json(deliveries);
-  } catch (error) {
-    console.error("Error getting deliveries:", error);
-    res.status(500).json({ message: "Error getting deliveries", error });
-  }
+
+// VIEW ALL DELIVERIES
+export const getDeliveries = (req, res) => {
+  Delivery.find()
+    .then((deliveries) => res.status(200).send(deliveries))
+    .catch((error) => res.status(500).send("Error getting deliveries: " + error));
 };
 
-export const getDeliveryById = async (req, res) => {
-  try {
-    const delivery = await Delivery.findById(req.params.id);
-    res.status(200).json(delivery);
-  } catch (error) {
-    console.error("Error getting delivery:", error);
-    res.status(500).json({ message: "Error getting delivery", error });
-  }
+
+// VIEW ONE DELIVERY
+export const getDeliveryById = (req, res) => {
+  const { id } = req.params;
+
+  Delivery.findById(id)
+    .then((delivery) => res.status(200).send(delivery))
+    .catch((error) => res.status(500).send("Error getting delivery: " + error));
 };
 
-export const updateDelivery = async (req, res) => {
-  try {
-    const delivery = await Delivery.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(delivery);
-  } catch (error) {
-    console.error("Error updating delivery:", error);
-    res.status(500).json({ message: "Error updating delivery", error });
-  }
+
+// UPDATE DELIVERY
+export const updateDelivery = (req, res) => {
+  const { id } = req.params;
+
+  Delivery.findOneAndUpdate(
+    { _id: id },
+    req.body,
+    { runValidators: true }
+  )
+    .then((delivery) => {
+      if (!delivery) {
+        return res.status(404).send("Delivery not found");
+      }
+
+      res.status(200).send("Delivery updated successfully");
+    })
+    .catch((error) => res.status(500).send("Error updating delivery: " + error));
+};
+
+
+// DELETE DELIVERY
+export const deleteDelivery = (req, res) => {
+  const { id } = req.params;
+
+  Delivery.findOneAndDelete({ _id: id })
+    .then((delivery) => {
+      if (!delivery) {
+        return res.status(404).send("Delivery not found");
+      }
+
+      res.status(200).send("Delivery deleted successfully");
+    })
+    .catch((error) => res.status(500).send("Error deleting delivery: " + error));
 };
