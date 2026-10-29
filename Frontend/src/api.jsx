@@ -42,24 +42,13 @@ export async function deleteUser(id) {
 
 
 // ORDER
-export async function submitCheckout(data) {
-  return await axios.post("http://localhost:3000/Checkout", data);
-}
-
-export async function getOrders() {
-  return await axios.get("http://localhost:3000/Orders");
-}
-
-export async function getOrderById(id) {
-  return await axios.get("http://localhost:3000/Orders/" + id);
-}
 
 export async function submitManageOrder(data) {
-  return await axios.put("http://localhost:3000/Orders/" + data.orderId, data);
+  return await axios.put("http://localhost:3000/Orders", data);
 }
 
-export async function cancelOrder(id) {
-  return await axios.put("http://localhost:3000/CancelOrder/" + id);
+export async function deleteOrder(orderId) {
+  return await axios.delete("http://localhost:3000/Orders/" + orderId);
 }
 
 

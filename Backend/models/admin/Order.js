@@ -2,7 +2,6 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-  customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   fullName: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
@@ -21,7 +20,8 @@ const orderSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
   paymentMethod: { type: String, required: true },
   paymentStatus: { type: String, default: "pending" },
-  orderStatus: { type: String, default: "pending" }
+  orderStatus: { type: String, default: "pending" },
+  riderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 const Order = mongoose.model("Order", orderSchema);

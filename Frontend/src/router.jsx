@@ -5,7 +5,7 @@ import App from './App.jsx'
 import Checkout from './checkout.jsx'
 import Contact from './Contact.jsx'
 import Customer from './Customer.jsx'
-import DeliveryStatus from './DeliveryStatus.jsx'
+
 import Delivery from './Delivery.jsx'
 import DeliveryAssignment from './DeliveryAssignment.jsx'
 
