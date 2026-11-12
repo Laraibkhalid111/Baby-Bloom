@@ -1,8 +1,4 @@
-import image from './assets/image.png'
-import p1 from './assets/p1.png'
-import p2 from './assets/p2.png'
-import p3 from './assets/p3.png'
-import p4 from './assets/p4.png'
+
 import bundle from './assets/bundle.png'
 import Brush from './assets/Brush.png'
 import bloom from './assets/bloom.png'
