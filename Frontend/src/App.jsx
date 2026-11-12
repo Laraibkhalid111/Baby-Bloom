@@ -7,8 +7,20 @@ import bundle from './assets/bundle.png'
 import Brush from './assets/Brush.png'
 import bloom from './assets/bloom.png'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { getProducts } from "./api";
 
 export function Navbar() {
+  function App() {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts()
+      .then((res) => setProducts(res.data))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid px-5 px-lg-5">
@@ -49,26 +61,37 @@ export function Navbar() {
   <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
 
     {/* Product  */}
-    <div className="col">
-      <div className="card h-100">
-        <img
-          src={p1}
-          className="card-img-top"
-          alt="Baby Shampoo"
-          style={{ height: '280px', objectFit: 'cover' }}
-        />
+   {products.map((product) => (
+  <div className="col" key={product._id}>
+    <div className="card h-100">
 
-        <div className="card-body">
-          <h5 className="card-title">Baby Shampoo</h5>
-          <p className="card-text">
-            Gentle shampoo for your baby's delicate hair and scalp.
-          </p>
-          <button className="btn btn-primary">
-            Add to Cart
-          </button>
-        </div>
+      <img
+        src={product.pimage}
+        className="card-img-top"
+        alt={product.pname}
+        style={{ height: "280px", objectFit: "cover" }}
+      />
+
+      <div className="card-body">
+
+        <h5 className="card-title">
+          {product.pname}
+        </h5>
+
+        <p className="card-text">
+          {product.pdescription}
+        </p>
+
+        <p>Rs. {product.pprice}</p>
+
+        <button className="btn btn-primary">
+          Add to Cart
+        </button>
+
       </div>
     </div>
+  </div>
+))}
 
    
   </div>
@@ -207,5 +230,7 @@ export function Navbar() {
 </footer>
         </>
     );
+    
  }
+}
   export default App;

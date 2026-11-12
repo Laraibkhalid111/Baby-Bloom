@@ -24,6 +24,13 @@ export const productController = (req, res) => {
     .catch((error) => res.status(500).send("Error adding product: " + error));
 };
 
+// VIEW PRODUCTS
+export const viewProductController = (req, res) => {
+  Product.find()
+    .then((products) => res.status(200).json(products))
+    .catch((error) => res.status(500).send(error));
+};
+
 
 // UPDATE PRODUCT
 export const editProductController = (req, res) => {
