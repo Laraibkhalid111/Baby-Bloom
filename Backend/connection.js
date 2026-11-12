@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import productRoutes from "./routes/admin/ProductRoutes.js";
-import userRoutes from "./routes/customer/userRoutes.js";
+import userRoutes from "./routes/admin/user.js";
 import orderRoutes from "./routes/admin/orderRoutes.js";
 import deliveryRoutes from "./routes/deliveryRider/deliveryRoutes.js";
   import contactRoutes from "./routes/customer/contactRoutes.js";

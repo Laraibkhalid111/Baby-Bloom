@@ -33,7 +33,8 @@ export const editProductController = (req, res) => {
     category,
     description,
     price,
-    stockQuantity
+    stockQuantity,
+    image 
   } = req.body;
 
   Product.findOneAndUpdate(
@@ -43,7 +44,8 @@ export const editProductController = (req, res) => {
       pcategory: category,
       pdescription: description,
       pprice: price,
-      pstock: stockQuantity
+      pstock: stockQuantity,
+      pimage: image
     },
     { runValidators: true }
   )

@@ -1,7 +1,8 @@
 
 import axios from "axios";
 
-// PRODUCT
+// ADMIN - PRODUCT
+
 export async function addProductAxiosFunction(data) {
   return await axios.post("http://localhost:3000/AddProduct", data);
 }
@@ -10,38 +11,20 @@ export async function editProductAxiosFunction(data) {
   return await axios.post("http://localhost:3000/edit", data);
 }
 
-export async function deleteProductAxiosFunction(data) {
+export async function submitEditProduct(data) {
+  return await axios.post("http://localhost:3000/edit", data);
+}
+
+export async function getProducts() {
+  return await axios.get("http://localhost:3000/Products");
+}
+
+export async function deleteProduct(data) {
   return await axios.delete("http://localhost:3000/", { data: data });
 }
 
 
-// USER
-export async function submitSignup(data) {
-  return await axios.post("http://localhost:3000/Signup", data);
-}
-
-export async function submitLogin(data) {
-  return await axios.post("http://localhost:3000/Login", data);
-}
-
-export async function getUsers() {
-  return await axios.get("http://localhost:3000/Users");
-}
-
-export async function getUserById(id) {
-  return await axios.get("http://localhost:3000/Users/" + id);
-}
-
-export async function updateUser(id, data) {
-  return await axios.put("http://localhost:3000/Users/" + id, data);
-}
-
-export async function deleteUser(id) {
-  return await axios.delete("http://localhost:3000/Users/" + id);
-}
-
-
-// ORDER
+// ADMIN - ORDER
 
 export async function submitManageOrder(data) {
   return await axios.put("http://localhost:3000/Orders", data);
@@ -52,27 +35,57 @@ export async function deleteOrder(orderId) {
 }
 
 
-// CONTACT
+// ADMIN - SIGNUP AND LOGIN
+
+export async function submitAdminSignup(data) {
+  return await axios.post("http://localhost:3000/AdminSignup", data);
+}
+
+export async function submitAdminLogin(data) {
+  return await axios.post("http://localhost:3000/AdminLogin", data);
+}
+
+
+// CUSTOMER - SIGNUP AND LOGIN
+
+export async function submitSignup(data) {
+  return await axios.post("http://localhost:3000/Signup", data);
+}
+
+export async function submitLogin(data) {
+  return await axios.post("http://localhost:3000/Login", data);
+}
+
+
+// CUSTOMER - CHECKOUT
+
+export async function submitCheckout(data) {
+  return await axios.post("http://localhost:3000/Checkout", data);
+}
+
+
+// CUSTOMER - CONTACT
+
 export async function submitContact(data) {
   return await axios.post("http://localhost:3000/Contact", data);
 }
 
-export async function getContacts() {
-  return await axios.get("http://localhost:3000/Contact");
-}
 
-export async function getContactById(id) {
-  return await axios.get("http://localhost:3000/Contact/" + id);
-}
+// CUSTOMER - REVIEW
 
-export async function deleteContact(id) {
-  return await axios.delete("http://localhost:3000/Contact/" + id);
+export async function submitReview(data) {
+  return await axios.post("http://localhost:3000/Review", data);
 }
 
 
-// DELIVERY
+// DELIVERY RIDER
+
 export async function submitDeliveryAssignment(data) {
   return await axios.post("http://localhost:3000/DeliveryAssignment", data);
+}
+
+export async function submitDeliveryStatus(data) {
+  return await axios.put("http://localhost:3000/DeliveryStatus/" + data.orderId, data);
 }
 
 export async function getDeliveries() {
@@ -81,12 +94,4 @@ export async function getDeliveries() {
 
 export async function getDeliveryById(id) {
   return await axios.get("http://localhost:3000/Deliveries/" + id);
-}
-
-export async function submitDeliveryStatus(data) {
-  return await axios.put("http://localhost:3000/DeliveryStatus/" + data.orderId, data);
-}
-
-export async function deleteDelivery(id) {
-  return await axios.delete("http://localhost:3000/Deliveries/" + id);
 }

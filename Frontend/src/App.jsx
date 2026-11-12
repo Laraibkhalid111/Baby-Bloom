@@ -48,7 +48,7 @@ export function Navbar() {
   <div className="container my-5">
   <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
 
-    {/* Product 1 */}
+    {/* Product  */}
     <div className="col">
       <div className="card h-100">
         <img
@@ -70,72 +70,7 @@ export function Navbar() {
       </div>
     </div>
 
-    {/* Product 2 */}
-    <div className="col">
-      <div className="card h-100">
-        <img
-          src={p2}
-          className="card-img-top"
-          alt="Baby Lotion"
-          style={{ height: '280px', objectFit: 'cover' }}
-        />
-
-        <div className="card-body">
-          <h5 className="card-title">Shower Gel</h5>
-          <p className="card-text">
-            Soft and gentle care for your baby's delicate skin.
-          </p>
-          <button className="btn btn-primary">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Product 3 */}
-    <div className="col">
-      <div className="card h-100">
-        <img
-          src={p3}
-          className="card-img-top"
-          alt="Baby Oil"
-          style={{ height: '280px', objectFit: 'cover' }}
-        />
-
-        <div className="card-body">
-          <h5 className="card-title">Baby lotion</h5>
-          <p className="card-text">
-            Nourishing oil for everyday baby care.
-          </p>
-          <button className="btn btn-primary">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Product 4 */}
-    <div className="col">
-      <div className="card h-100">
-        <img
-          src={p4}
-          className="card-img-top"
-          alt="Baby Powder"
-          style={{ height: '280px', objectFit: 'cover' }}
-        />
-
-        <div className="card-body">
-          <h5 className="card-title">Baby oil</h5>
-          <p className="card-text">
-            Gentle powder for comfortable everyday baby care.
-          </p>
-          <button className="btn btn-primary">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-
+   
   </div>
 </div>
  <div className="container my-5">
